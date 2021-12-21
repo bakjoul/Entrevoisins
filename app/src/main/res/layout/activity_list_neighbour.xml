@@ -32,13 +32,11 @@
             app:tabIndicatorHeight="3dp">
 
             <android.support.design.widget.TabItem
-                android:id="@+id/tabItem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tab_neighbour_title" />
 
             <android.support.design.widget.TabItem
-                android:id="@+id/tabItem2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tab_favorites_title" />
@@ -54,11 +52,12 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/add_neighbour"
-        app:backgroundTint="@color/colorPrimary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="@dimen/fab_margin"
+        android:onClick="addNeighbour"
+        app:backgroundTint="@color/colorPrimary"
         app:srcCompat="@drawable/ic_person_add_white_24dp" />
 
 </android.support.design.widget.CoordinatorLayout>
