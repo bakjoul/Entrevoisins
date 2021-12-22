@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.databinding.ActivityListNeighbourBinding;
@@ -47,5 +48,10 @@ public class ListNeighbourActivity extends AppCompatActivity {
     //@OnClick(R.id.add_neighbour)
     public void addNeighbour(View view) {
         AddNeighbourActivity.navigate(this);
+    }
+
+    public void test(View view) {
+        Toast toast = Toast.makeText(getApplicationContext(), "TEST", Toast.LENGTH_SHORT);
+        toast.show();
     }
 }
