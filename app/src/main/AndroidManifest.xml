@@ -14,7 +14,14 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.neighbour_list.NeighbourDetailsActivity"
-            android:exported="false" />
+            android:label="Neighbour card"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ui.neighbour_list.AddNeighbourActivity"
             android:label="@string/activity_new_neighbour" />
