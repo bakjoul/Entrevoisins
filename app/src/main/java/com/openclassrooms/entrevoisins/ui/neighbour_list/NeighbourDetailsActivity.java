@@ -18,6 +18,9 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         b = ActivityNeighbourDetailsBinding.inflate(getLayoutInflater());
         setContentView(b.getRoot());
+
+        if (getSupportActionBar() != null)
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
     public static void navigate(FragmentActivity activity) {
