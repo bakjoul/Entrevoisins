@@ -52,6 +52,7 @@ public class NeighbourFragment extends Fragment {
         mRecyclerView = (RecyclerView) view;
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+        this.configueOnclickRecyclerView(); // Appel de la méthode qui configure le clic
         return view;
     }
 
@@ -89,5 +90,15 @@ public class NeighbourFragment extends Fragment {
     public void onDeleteNeighbour(DeleteNeighbourEvent event) {
         mApiService.deleteNeighbour(event.neighbour);
         initList();
+    }
+
+    // Configure le clic sur un item du RecyclerView
+    private void configueOnclickRecyclerView() {
+        ItemClickSupport.addTo(mRecyclerView, R.layout.fragment_neighbour).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                NeighbourDetailsActivity.navigate(getActivity(), position);
+            }
+        });
     }
 }

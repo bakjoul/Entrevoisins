@@ -29,8 +29,4 @@ public class ListNeighbourActivity extends AppCompatActivity {
     public void addNeighbour(View view) {
         AddNeighbourActivity.navigate(this);
     }
-
-    public void showNeighbour(View view) {
-        NeighbourDetailsActivity.navigate(this);
-    }
 }
