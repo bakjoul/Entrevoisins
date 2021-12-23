@@ -1,9 +1,7 @@
-package com.openclassrooms.entrevoisins.ui.neighbour_list;
+package com.openclassrooms.entrevoisins.utils;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-
-import com.openclassrooms.entrevoisins.R;
 
 public class ItemClickSupport {
     private final RecyclerView mRecyclerView;

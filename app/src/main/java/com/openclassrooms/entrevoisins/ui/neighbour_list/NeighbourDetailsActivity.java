@@ -9,14 +9,17 @@ import android.os.Bundle;
 
 import com.bumptech.glide.Glide;
 import com.openclassrooms.entrevoisins.databinding.ActivityNeighbourDetailsBinding;
+import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.model.Neighbour;
-import com.openclassrooms.entrevoisins.service.DummyNeighbourGenerator;
+import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 
 import java.text.Normalizer;
 
 public class NeighbourDetailsActivity extends AppCompatActivity {
 
     private ActivityNeighbourDetailsBinding b;
+    private NeighbourApiService mApiService;
+    private Neighbour mNeighbour;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,21 +41,21 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void getInfo() {
-        Intent intent = getIntent();
-        int position = intent.getIntExtra("position", -1);
-        Neighbour neighbour = DummyNeighbourGenerator.DUMMY_NEIGHBOURS.get(position);
+        int position = getIntent().getIntExtra("position", -1);
+        mApiService = DI.getNeighbourApiService();
+        mNeighbour = mApiService.getNeighbours().get(position);
 
         // Enlève les accents dans le nom pour la fausse url
-        String normalizedName = Normalizer.normalize(neighbour.getName(), Normalizer.Form.NFD);
+        String normalizedName = Normalizer.normalize(mNeighbour.getName(), Normalizer.Form.NFD);
         String urlName = normalizedName.replaceAll("\\p{M}", "").toLowerCase();
 
         // Récupération des informations sur le voisin récupéré
-        Glide.with(b.neighbourDetailsAvatar).load(neighbour.getAvatarUrl()).into(b.neighbourDetailsAvatar);
-        b.neighbourDetailsAvatarName.setText(neighbour.getName());
-        b.cardInfoName.setText(neighbour.getName());
-        b.cardInfoLocation.setText(neighbour.getAddress());
-        b.cardInfoPhone.setText(neighbour.getPhoneNumber());
+        Glide.with(b.neighbourDetailsAvatar).load(mNeighbour.getAvatarUrl()).into(b.neighbourDetailsAvatar);
+        b.neighbourDetailsAvatarName.setText(mNeighbour.getName());
+        b.cardInfoName.setText(mNeighbour.getName());
+        b.cardInfoLocation.setText(mNeighbour.getAddress());
+        b.cardInfoPhone.setText(mNeighbour.getPhoneNumber());
         b.cardInfoUrl.setText("www.facebook.fr/"+urlName);
-        b.cardAboutContent.setText(neighbour.getAboutMe());
+        b.cardAboutContent.setText(mNeighbour.getAboutMe());
     }
 }
