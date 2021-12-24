@@ -18,8 +18,6 @@ import java.text.Normalizer;
 public class NeighbourDetailsActivity extends AppCompatActivity {
 
     private ActivityNeighbourDetailsBinding b;
-    private NeighbourApiService mApiService;
-    private Neighbour mNeighbour;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +25,11 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
         b = ActivityNeighbourDetailsBinding.inflate(getLayoutInflater());
         setContentView(b.getRoot());
 
+        // Cache le titre de l'actionbar
         if (getSupportActionBar() != null)
             getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        getInfo();
+        getInfo();  // Récupère les informations du voisin sélectionné
     }
 
     public static void navigate(FragmentActivity activity, int position) {
@@ -42,8 +41,8 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     private void getInfo() {
         int position = getIntent().getIntExtra("position", -1);
-        mApiService = DI.getNeighbourApiService();
-        mNeighbour = mApiService.getNeighbours().get(position);
+        NeighbourApiService mApiService = DI.getNeighbourApiService();
+        Neighbour mNeighbour = mApiService.getNeighbours().get(position);
 
         // Enlève les accents dans le nom pour la fausse url
         String normalizedName = Normalizer.normalize(mNeighbour.getName(), Normalizer.Form.NFD);
