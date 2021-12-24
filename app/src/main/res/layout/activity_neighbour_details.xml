@@ -1,133 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/neighbour_info"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/neighbour_details_avatar"
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/neighbour_info"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/neighbour_avatar"
-            android:scaleType="centerCrop"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/neighbour_details_avatar_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="20dp"
-            android:textAlignment="textEnd"
-            android:textColor="@android:color/white"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@id/neighbour_details_avatar"
-            app:layout_constraintStart_toStartOf="@id/neighbour_details_avatar"
-            tools:text="Name" />
-    </android.support.constraint.ConstraintLayout>
-
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="10dp"
-        android:layout_weight="0.7">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/neighbour_details_avatar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/neighbour_avatar"
+                android:scaleType="centerCrop"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
-                android:id="@+id/card_info_name"
-                android:layout_width="match_parent"
+                android:id="@+id/neighbour_details_avatar_name"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:background="@drawable/underline"
-                android:gravity="center_vertical"
-                android:paddingHorizontal="15dp"
-                android:textColor="@android:color/black"
-                android:textSize="22sp"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="20dp"
+                android:textAlignment="textEnd"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="@id/neighbour_details_avatar"
+                app:layout_constraintStart_toStartOf="@id/neighbour_details_avatar"
                 tools:text="Name" />
+        </android.support.constraint.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/card_info_location"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:drawableStart="@drawable/ic_baseline_location_on_24"
-                android:drawablePadding="10dp"
-                android:gravity="center_vertical"
-                android:paddingHorizontal="10dp"
-                tools:text="Location" />
-
-            <TextView
-                android:id="@+id/card_info_phone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:drawableStart="@drawable/ic_baseline_local_phone_24"
-                android:drawablePadding="10dp"
-                android:gravity="center_vertical"
-                android:paddingHorizontal="10dp"
-                tools:text="Phone" />
-
-            <TextView
-                android:id="@+id/card_info_url"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:drawableStart="@drawable/ic_website_24"
-                android:drawablePadding="10dp"
-                android:gravity="center_vertical"
-                android:paddingHorizontal="10dp"
-                tools:text="URL" />
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="10dp"
-        android:layout_weight="0.7">
-
-        <LinearLayout
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_info"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="10dp">
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            android:layout_weight="0.7">
 
-            <TextView
-                android:id="@+id/card_about_title"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.1"
-                android:background="@drawable/underline"
-                android:gravity="center_vertical"
-                android:paddingStart="5dp"
-                android:paddingEnd="5dp"
-                android:text="@string/about_me"
-                android:textColor="@android:color/black"
-                android:textSize="22sp" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/card_about_content"
+                <TextView
+                    android:id="@+id/card_info_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5"
+                    android:background="@drawable/underline"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="15dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="22sp"
+                    tools:text="Name" />
+
+                <TextView
+                    android:id="@+id/card_info_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5"
+                    android:drawableStart="@drawable/ic_baseline_location_on_24"
+                    android:drawablePadding="10dp"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="10dp"
+                    tools:text="Location" />
+
+                <TextView
+                    android:id="@+id/card_info_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5"
+                    android:drawableStart="@drawable/ic_baseline_local_phone_24"
+                    android:drawablePadding="10dp"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="10dp"
+                    tools:text="Phone" />
+
+                <TextView
+                    android:id="@+id/card_info_url"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5"
+                    android:drawableStart="@drawable/ic_website_24"
+                    android:drawablePadding="10dp"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="10dp"
+                    tools:text="URL" />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_about"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            android:layout_weight="0.7">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.9"
-                android:paddingHorizontal="5dp"
-                android:paddingVertical="10dp"
-                tools:text="Content" />
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="10dp">
 
-</LinearLayout>
+                <TextView
+                    android:id="@+id/card_about_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:background="@drawable/underline"
+                    android:gravity="center_vertical"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:text="@string/about_me"
+                    android:textColor="@android:color/black"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/card_about_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.9"
+                    android:paddingHorizontal="5dp"
+                    android:paddingVertical="10dp"
+                    tools:text="Content" />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginHorizontal="10dp"
+        android:contentDescription="@string/add_to_favorites"
+        app:layout_anchor="@id/neighbour_details_avatar"
+        app:layout_anchorGravity="bottom|right" />
+
+</android.support.design.widget.CoordinatorLayout>
