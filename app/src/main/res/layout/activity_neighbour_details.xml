@@ -142,9 +142,9 @@
         android:layout_height="56dp"
         android:layout_marginHorizontal="10dp"
         android:contentDescription="@string/add_to_favorites"
-        app:backgroundTint="#FAFAFA"
+        android:src="@drawable/ic_star_white_24dp"
+        app:backgroundTint="#EFEFEF"
         app:layout_anchor="@id/neighbour_details_avatar"
-        app:layout_anchorGravity="bottom|right"
-        android:src="@drawable/ic_baseline_star_24"/>
+        app:layout_anchorGravity="bottom|right" />
 
 </android.support.design.widget.CoordinatorLayout>
