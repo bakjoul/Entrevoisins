@@ -61,6 +61,7 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
         b.cardInfoPhone.setText(mNeighbour.getPhoneNumber());
         b.cardInfoUrl.setText("www.facebook.fr/"+urlName);
         b.cardAboutContent.setText(mNeighbour.getAboutMe());
+        b.fabFavorite.setSelected(mNeighbour.isFavorite());
     }
 
     // Ajoute/supprime le voisin des favoris
