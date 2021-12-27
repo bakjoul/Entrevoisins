@@ -59,21 +59,20 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
         b.cardInfoName.setText(mNeighbour.getName());
         b.cardInfoLocation.setText(mNeighbour.getAddress());
         b.cardInfoPhone.setText(mNeighbour.getPhoneNumber());
-        b.cardInfoUrl.setText("www.facebook.fr/"+urlName);
+        b.cardInfoUrl.setText("www.facebook.fr/" + urlName);
         b.cardAboutContent.setText(mNeighbour.getAboutMe());
         b.fabFavorite.setSelected(mNeighbour.isFavorite());
     }
 
     // Ajoute/supprime le voisin des favoris
     public void switchFavorite(View view) {
-       if (b.fabFavorite.isSelected()) {
-           mApiService.deleteFavoriteNeighbour(mNeighbour);
-           b.fabFavorite.setSelected(false);
-       }
-       else {
-           mApiService.addFavoriteNeighbour(mNeighbour);
-           b.fabFavorite.setSelected(true);
-       }
+        if (b.fabFavorite.isSelected()) {   // Si le bouton est activé,
+            mApiService.deleteFavoriteNeighbour(mNeighbour);    // on retire des favoris
+            b.fabFavorite.setSelected(false);                   // et passe le bouton à désactivé.
+        } else {    // Si le bouton est désactivé,
+            mApiService.addFavoriteNeighbour(mNeighbour);   // on ajoute le voisin des favoris
+            b.fabFavorite.setSelected(true);                // et passe le bouton à activé.
+        }
     }
 
 }

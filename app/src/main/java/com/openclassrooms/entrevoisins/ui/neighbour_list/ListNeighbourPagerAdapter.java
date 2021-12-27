@@ -13,16 +13,20 @@ public class ListNeighbourPagerAdapter extends FragmentPagerAdapter {
 
     /**
      * getItem is called to instantiate the fragment for the given page.
+     *
      * @param position
      * @return
      */
     @Override
+    // Si on sélectionne l'onglet Favorites (position == 1 => true), la liste des favoris sera affichée
+    // sinon la liste de tous les voisins est affichée
     public Fragment getItem(int position) {
         return NeighbourFragment.newInstance(position == 1);
     }
 
     /**
      * get the number of pages
+     *
      * @return
      */
     @Override

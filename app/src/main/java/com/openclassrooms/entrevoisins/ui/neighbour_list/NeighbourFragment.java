@@ -35,13 +35,14 @@ public class NeighbourFragment extends Fragment {
 
     /**
      * Create and return a new instance
+     *
      * @return @{@link NeighbourFragment}
      */
     public static NeighbourFragment newInstance(boolean favorites) {
         NeighbourFragment fragment = new NeighbourFragment();
         Bundle args = new Bundle();
-        args.putBoolean(ARG_FAVORITES, favorites);
-        fragment.setArguments(args);
+        args.putBoolean(ARG_FAVORITES, favorites);  // Récupère l'argument passé en paramètre et le met dans le bundle
+        fragment.setArguments(args);    // passe le bundle en argument au fragment
         return fragment;
     }
 
@@ -49,7 +50,8 @@ public class NeighbourFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mApiService = DI.getNeighbourApiService();
-        if(getArguments() != null)
+        // Récupère les arguments passés (boolean favoris ou non)
+        if (getArguments() != null)
             favorites = getArguments().getBoolean(ARG_FAVORITES, false);
     }
 
@@ -96,6 +98,7 @@ public class NeighbourFragment extends Fragment {
 
     /**
      * Fired if the user clicks on a delete button
+     *
      * @param event
      */
     @Subscribe
