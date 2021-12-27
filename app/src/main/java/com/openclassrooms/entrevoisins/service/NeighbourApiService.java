@@ -33,4 +33,16 @@ public interface NeighbourApiService {
      * @param neighbour
      */
     void createNeighbour(Neighbour neighbour);
+
+    /**
+     * Add a favorite neighbour
+     * @param neighbour
+     */
+    void addFavoriteNeighbour(Neighbour neighbour);
+
+    /**
+     * Delete a favorite neighbour
+     * @param neighbour
+     */
+    void deleteFavoriteNeighbour(Neighbour neighbour);
 }
