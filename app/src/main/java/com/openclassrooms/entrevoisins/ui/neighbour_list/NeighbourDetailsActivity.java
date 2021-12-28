@@ -21,6 +21,7 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
     private ActivityNeighbourDetailsBinding b;
     private NeighbourApiService mApiService;
     private Neighbour mNeighbour;
+    private static boolean showFavorites = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,18 +37,22 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
     }
 
     // Démarre l'activité en chargeant le bon voisin
-    public static void navigate(FragmentActivity activity, int position) {
+    public static void navigate(FragmentActivity activity, int position, boolean favorites) {
         Intent intent = new Intent(activity, NeighbourDetailsActivity.class);
         intent.putExtra("position", position);
+        showFavorites = favorites;
         ActivityCompat.startActivity(activity, intent, null);
     }
 
     // Charge les informations du voisin sélectionné
     @SuppressLint("SetTextI18n")
     private void getInfo() {
-        int position = getIntent().getIntExtra("position", -1);
+        int position = getIntent().getIntExtra("position", -1); // Récupère la position de l'item cliqué
         mApiService = DI.getNeighbourApiService();
-        mNeighbour = mApiService.getNeighbours().get(position);
+        if (showFavorites)
+            mNeighbour = mApiService.getFavoriteNeighbours().get(position);
+        else
+            mNeighbour = mApiService.getNeighbours().get(position);
 
         // Enlève les accents dans le nom pour la fausse url
         String normalizedName = Normalizer.normalize(mNeighbour.getName(), Normalizer.Form.NFD);

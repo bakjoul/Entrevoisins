@@ -112,7 +112,7 @@ public class NeighbourFragment extends Fragment {
         ItemClickSupport.addTo(mRecyclerView, R.layout.fragment_neighbour).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                NeighbourDetailsActivity.navigate(getActivity(), position);
+                NeighbourDetailsActivity.navigate(getActivity(), position, favorites);
             }
         });
     }
