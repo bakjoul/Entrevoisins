@@ -14,6 +14,7 @@ import com.openclassrooms.entrevoisins.ui.neighbour_list.ListNeighbourActivity;
 import com.openclassrooms.entrevoisins.ui.neighbour_list.NeighbourDetailsActivity;
 import com.openclassrooms.entrevoisins.utils.DeleteViewAction;
 
+import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Rule;
@@ -21,6 +22,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.assertThat;
@@ -28,6 +30,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.hasMinimumChild
 import static android.support.test.espresso.intent.Intents.intended;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static com.openclassrooms.entrevoisins.utils.RecyclerViewItemCountAssertion.withItemCount;
@@ -67,7 +70,7 @@ public class NeighboursListTest {
     }
 
     /**
-     * Quand on clique sur supprimer, la liste compte bien un voisin en moins
+     * Au clic sur supprimer, la liste compte bien un voisin en moins
      */
     @Test
     public void myNeighboursList_deleteAction_shouldRemoveItem() {
@@ -81,7 +84,7 @@ public class NeighboursListTest {
     }
 
     /**
-     * Quand on clique sur un élément, l'écran de détails se lance
+     * Au clic sur un élément, l'écran de détails se lance
      */
     @Test
     public void onItemClick_shouldStartDetailsActivity() {
@@ -101,9 +104,32 @@ public class NeighboursListTest {
     public void cardInfoName_shouldDisplayNeighbourName() {
         // Récupère le deuxième voisin de la liste
         Neighbour neighbour = DI.getNeighbourApiService().getNeighbours().get(1);
-        // Effectue un clic sur l'élément à la position 0 (2e voisin)
+        // Effectue un clic sur l'élément à la position 1 (2e voisin)
         onView(Matchers.allOf(withId(R.id.list_neighbours), isDisplayed())).perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
         // Vérifie que le textView du nom du voisin contient bien le bon nom
         onView(withId(R.id.card_info_name)).check(matches(withText(neighbour.getName())));
+    }
+
+    /**
+     * Vérifie que l'onglet Favoris n'affiche que les voisins marqués comme favoris
+     */
+    @Test
+    public void favoritesTab_shouldOnlyDisplayFavorites() {
+        // Affichage de l'onglet des favoris
+        onView(withContentDescription("Favorites")).perform(click());
+        // Vérifie que la liste est bien vide
+        onView(Matchers.allOf(withId(R.id.list_neighbours), isDisplayed())).check(withItemCount(0));
+        // Affichage de l'onglet de tous les voisins
+        onView(withContentDescription("My neighbours")).perform(click());
+        // Effectue un clic sur l'élément à la position 0 de la liste
+        onView(Matchers.allOf(withId(R.id.list_neighbours), isDisplayed())).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+        // Ajoute le voisin aux favoris
+        onView(withId(R.id.fab_favorite)).perform(click());
+        // Retour à la liste des voisins
+        pressBack();
+        // Affichage de l'onglet des favoris
+        onView(withContentDescription("Favorites")).perform(click());
+        // La liste de favoris doit contenir un voisin
+        onView(Matchers.allOf(withId(R.id.list_neighbours), isDisplayed())).check(withItemCount(1));
     }
 }
