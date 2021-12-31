@@ -8,6 +8,8 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.openclassrooms.entrevoisins.R;
+import com.openclassrooms.entrevoisins.di.DI;
+import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.ui.neighbour_list.ListNeighbourActivity;
 import com.openclassrooms.entrevoisins.ui.neighbour_list.NeighbourDetailsActivity;
 import com.openclassrooms.entrevoisins.utils.DeleteViewAction;
@@ -27,6 +29,7 @@ import static android.support.test.espresso.intent.Intents.intended;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static com.openclassrooms.entrevoisins.utils.RecyclerViewItemCountAssertion.withItemCount;
 import static org.hamcrest.core.IsNull.notNullValue;
 
@@ -89,5 +92,18 @@ public class NeighboursListTest {
         // Vérifie que l'écran de détail est bien lancé
         intended(hasComponent(NeighbourDetailsActivity.class.getName()));
         Intents.release();
+    }
+
+    /**
+     * Au démarrage de l'écran de détails, le textView du nom du voisin en question est bien rempli
+     */
+    @Test
+    public void cardInfoName_shouldDisplayNeighbourName() {
+        // Récupère le deuxième voisin de la liste
+        Neighbour neighbour = DI.getNeighbourApiService().getNeighbours().get(1);
+        // Effectue un clic sur l'élément à la position 0 (2e voisin)
+        onView(Matchers.allOf(withId(R.id.list_neighbours), isDisplayed())).perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
+        // Vérifie que le textView du nom du voisin contient bien le bon nom
+        onView(withId(R.id.card_info_name)).check(matches(withText(neighbour.getName())));
     }
 }
