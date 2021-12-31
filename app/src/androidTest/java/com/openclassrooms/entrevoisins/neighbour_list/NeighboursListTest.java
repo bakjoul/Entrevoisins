@@ -67,16 +67,16 @@ public class NeighboursListTest {
     }
 
     /**
-     * When we delete an item, the item is no more shown
+     * Quand on clique sur supprimer, la liste compte bien un voisin en moins
      */
     @Test
     public void myNeighboursList_deleteAction_shouldRemoveItem() {
-        // Given : We remove the element at position 2
+        // Vérifie qu'il y a bien 12 éléments dans la liste
         onView(ViewMatchers.withId(R.id.list_neighbours)).check(withItemCount(ITEMS_COUNT));
-        // When perform a click on a delete icon
+        // Clique sur le bouton supprimer du 2ème élément
         onView(ViewMatchers.withId(R.id.list_neighbours))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(1, new DeleteViewAction()));
-        // Then : the number of element is 11
+        // Vérifie que le nombre d'éléments passe à 11
         onView(ViewMatchers.withId(R.id.list_neighbours)).check(withItemCount(ITEMS_COUNT-1));
     }
 
