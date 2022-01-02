@@ -52,11 +52,11 @@ public class NeighbourServiceTest {
         Neighbour neighbourToCreate = service.getNeighbours().get(0);
         // Récupère la taille de la liste des voisins
         int sizeBefore = service.getNeighbours().size();
-        // Ajoute à la liste le voisin précédemment initialisé
+        // Ajoute à la liste le voisin précédemment récupéré
         service.createNeighbour(neighbourToCreate);
         // Vérifie qu'il y a bien un voisin de plus dans la liste
         assertEquals(sizeBefore + 1, service.getNeighbours().size());
-        // Vérifie que le dernier voisin de la liste est bien celui créé
+        // Vérifie que le dernier voisin de la liste est bien celui ajouté
         assertEquals(neighbourToCreate, service.getNeighbours().get(service.getNeighbours().size() - 1));
     }
 
@@ -65,7 +65,7 @@ public class NeighbourServiceTest {
      */
     @Test
     public void getFavoriteNeighboursWithSuccess() {
-        // Initialise un voisin au premier voisin de la liste
+        // Récupère le premier voisin de la liste
         Neighbour favoriteNeighbour = service.getNeighbours().get(0);
         // Ajoute le voisin aux favoris
         service.addFavoriteNeighbour(favoriteNeighbour);
@@ -78,13 +78,13 @@ public class NeighbourServiceTest {
      */
     @Test
     public void addNeighbourToFavoritesWithSuccess() {
-        // Initialise un voisin à ajouter aux favoris
+        // Récupère un voisin à ajouter aux favoris
         Neighbour neighbourToAddToFavorites = service.getNeighbours().get(0);
         // Vérifie que ce voisin n'est pas dans la liste des favoris
         assertFalse(service.getFavoriteNeighbours().contains(neighbourToAddToFavorites));
         // Ajoute le voisin aux favoris
         service.addFavoriteNeighbour(neighbourToAddToFavorites);
-        // Vérifie que le voisin est maintenant bien dans la liste des favoris
+        // Vérifie que le voisin est bien dans la liste des favoris
         assertTrue(service.getFavoriteNeighbours().contains(neighbourToAddToFavorites));
     }
 
@@ -93,7 +93,7 @@ public class NeighbourServiceTest {
      */
     @Test
     public void deleteNeighbourFromFavoritesWithSuccess() {
-        // Initialise un voisin à retirer des favoris
+        // Récupère un voisin à retirer des favoris
         Neighbour neighbourToRemoveFromFavorites = service.getNeighbours().get(0);
         // Ajoute d'abord le voisin aux favoris
         service.addFavoriteNeighbour(neighbourToRemoveFromFavorites);
