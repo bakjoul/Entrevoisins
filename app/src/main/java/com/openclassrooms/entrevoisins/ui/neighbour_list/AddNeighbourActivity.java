@@ -1,8 +1,6 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
 import android.content.Intent;
-import android.support.design.button.MaterialButton;
-import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
@@ -10,54 +8,39 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MenuItem;
-import android.widget.ImageView;
+import android.view.View;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.openclassrooms.entrevoisins.R;
+import com.openclassrooms.entrevoisins.databinding.ActivityAddNeighbourBinding;
 import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class AddNeighbourActivity extends AppCompatActivity {
 
-    @BindView(R.id.avatar)
-    ImageView avatar;
-    @BindView(R.id.nameLyt)
-    TextInputLayout nameInput;
-    @BindView(R.id.phoneNumberLyt)
-    TextInputLayout phoneInput;
-    @BindView(R.id.addressLyt)
-    TextInputLayout addressInput;
-    @BindView(R.id.aboutMeLyt)
-    TextInputLayout aboutMeInput;
-    @BindView(R.id.create)
-    MaterialButton addButton;
-
+    private ActivityAddNeighbourBinding b;
     private NeighbourApiService mApiService;
     private String mNeighbourImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_neighbour);
-        ButterKnife.bind(this);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        b = ActivityAddNeighbourBinding.inflate(getLayoutInflater());
+        setContentView(b.getRoot());
+
+        if (getSupportActionBar() != null)
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mApiService = DI.getNeighbourApiService();
         init();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home : {
-                finish();
-                return true;
-            }
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -65,29 +48,27 @@ public class AddNeighbourActivity extends AppCompatActivity {
     private void init() {
         mNeighbourImage = randomImage();
         Glide.with(this).load(mNeighbourImage).placeholder(R.drawable.ic_account)
-                .apply(RequestOptions.circleCropTransform()).into(avatar);
-        nameInput.getEditText().addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) { }
-            @Override
-            public void afterTextChanged(Editable s) {
-                addButton.setEnabled(s.length() > 0);
-            }
-        });
-
+                .apply(RequestOptions.circleCropTransform()).into(b.avatar);
+            b.nameLyt.getEditText().addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) { }
+                @Override
+                public void afterTextChanged(Editable s) {
+                    b.create.setEnabled(s.length() > 0);
+                }
+            });
     }
 
-    @OnClick(R.id.create)
-    void addNeighbour() {
+    public void createNeighbour(View view) {
         Neighbour neighbour = new Neighbour(
                 System.currentTimeMillis(),
-                nameInput.getEditText().getText().toString(),
+                b.nameLyt.getEditText().getText().toString(),
                 mNeighbourImage,
-                addressInput.getEditText().getText().toString(),
-                phoneInput.getEditText().getText().toString(),
-                aboutMeInput.getEditText().getText().toString(),
+                b.addressLyt.getEditText().getText().toString(),
+                b.phoneNumberLyt.getEditText().getText().toString(),
+                b.aboutMeLyt.getEditText().getText().toString(),
                 false
         );
         mApiService.createNeighbour(neighbour);
