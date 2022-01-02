@@ -4,22 +4,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.openclassrooms.entrevoisins.R;
+import com.openclassrooms.entrevoisins.databinding.FragmentNeighbourBinding;
 import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeighbourRecyclerViewAdapter.ViewHolder> {
 
@@ -31,21 +25,22 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_neighbour, parent, false);
-        return new ViewHolder(view);
+        FragmentNeighbourBinding b = FragmentNeighbourBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+/*        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.fragment_neighbour, parent, false);*/
+        return new ViewHolder(b);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         Neighbour neighbour = mNeighbours.get(position);
-        holder.mNeighbourName.setText(neighbour.getName());
-        Glide.with(holder.mNeighbourAvatar.getContext())
+        holder.b.itemListName.setText(neighbour.getName());
+        Glide.with(holder.b.itemListAvatar.getContext())
                 .load(neighbour.getAvatarUrl())
                 .apply(RequestOptions.circleCropTransform())
-                .into(holder.mNeighbourAvatar);
+                .into(holder.b.itemListAvatar);
 
-        holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
+        holder.b.itemListDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EventBus.getDefault().post(new DeleteNeighbourEvent(neighbour));
@@ -58,17 +53,13 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
         return mNeighbours.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.item_list_avatar)
-        public ImageView mNeighbourAvatar;
-        @BindView(R.id.item_list_name)
-        public TextView mNeighbourName;
-        @BindView(R.id.item_list_delete_button)
-        public ImageButton mDeleteButton;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        public ViewHolder(View view) {
-            super(view);
-            ButterKnife.bind(this, view);
+        private FragmentNeighbourBinding b;
+
+        public ViewHolder(FragmentNeighbourBinding binding) {
+            super(binding.getRoot());
+            this.b = binding;
         }
     }
 }

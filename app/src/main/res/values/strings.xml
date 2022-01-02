@@ -6,10 +6,11 @@
     <string name="neighbour_avatar">Neighbour avatar</string>
     <string name="about_me">À propos de moi</string>
     <string name="delete_neighbour">Delete neighbour</string>
-    <string name="add_to_favorites">Add to favorites</string>
+    <string name="fab_add_to_favorites">Add to favorites</string>
     <string name="add_neighbour_name">Name</string>
     <string name="add_neighbour_phone_number">Phone number</string>
     <string name="add_neighbour_address">Address</string>
     <string name="add_neighbour_about_me">About me</string>
     <string name="add_neighbour_save">Save</string>
+    <string name="fab_add_neighbour">Add a neighbour</string>
 </resources>
