@@ -26,8 +26,6 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         FragmentNeighbourBinding b = FragmentNeighbourBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-/*        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_neighbour, parent, false);*/
         return new ViewHolder(b);
     }
 
