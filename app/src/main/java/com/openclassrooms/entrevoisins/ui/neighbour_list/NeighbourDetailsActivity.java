@@ -22,7 +22,7 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
     private ActivityNeighbourDetailsBinding b;
     private NeighbourApiService mApiService;
     private Neighbour mNeighbour;
-    private static boolean showFavorites = false;
+    private static boolean favoritesTab = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +50,7 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
     public static void navigate(FragmentActivity activity, int position, boolean favorites) {
         Intent intent = new Intent(activity, NeighbourDetailsActivity.class);
         intent.putExtra("position", position);
-        showFavorites = favorites;
+        favoritesTab = favorites;
         ActivityCompat.startActivity(activity, intent, null);
     }
 
@@ -59,7 +59,7 @@ public class NeighbourDetailsActivity extends AppCompatActivity {
     private void getInfo() {
         int position = getIntent().getIntExtra("position", -1); // Récupère la position de l'item cliqué
         mApiService = DI.getNeighbourApiService();
-        if (showFavorites)
+        if (favoritesTab)
             mNeighbour = mApiService.getFavoriteNeighbours().get(position);
         else
             mNeighbour = mApiService.getNeighbours().get(position);
