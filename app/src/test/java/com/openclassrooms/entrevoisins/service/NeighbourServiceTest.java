@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -65,12 +66,21 @@ public class NeighbourServiceTest {
      */
     @Test
     public void getFavoriteNeighboursWithSuccess() {
+        // Récupère la liste des favoris
+        List<Neighbour> favoriteNeighbours = service.getFavoriteNeighbours();
+        // Vérifie que la liste est vide
+        assertTrue(favoriteNeighbours.isEmpty());
         // Récupère le premier voisin de la liste
-        Neighbour favoriteNeighbour = service.getNeighbours().get(0);
-        // Ajoute le voisin aux favoris
-        service.addFavoriteNeighbour(favoriteNeighbour);
-        // Vérifie que le voisin est bien dans les favoris quand on appelle la liste des favoris
-        assertTrue(service.getFavoriteNeighbours().contains(favoriteNeighbour));
+        Neighbour favoriteNeighbour1 = service.getNeighbours().get(0);
+        // Récupère le troisième voisin de la liste
+        Neighbour favoriteNeighbour2 = service.getNeighbours().get(2);
+        // Ajoute ces voisins aux favoris
+        service.addFavoriteNeighbour(favoriteNeighbour1);
+        service.addFavoriteNeighbour(favoriteNeighbour2);
+        // Récupère la liste des favoris actualisée
+        favoriteNeighbours = service.getFavoriteNeighbours();
+        // Vérifie que la liste des favoris nouvellement récupérée est égale à la liste (favoriteNeighbour1, favoriteNeighbour2)
+        assertEquals(favoriteNeighbours, Arrays.asList(favoriteNeighbour1, favoriteNeighbour2));
     }
 
     /**
